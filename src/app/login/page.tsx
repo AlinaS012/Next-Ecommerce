@@ -16,7 +16,7 @@ enum MODE {
 const LoginPage = () => {
   const router = useRouter();
 
-  const isLoggedIn = localStorage.getItem("token");
+  const isLoggedIn = undefined; //localStorage.getItem("token");
 
   useEffect(() => {
     if (isLoggedIn) {
