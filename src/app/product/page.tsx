@@ -4,24 +4,29 @@ import CustomizeProducts from "@/components/CustomizeProducts";
 import ProductImages from "@/components/ProductImages";
 import useSupabase from "@/hooks/useSupabase";
 import { PostgrestError, SupabaseClient } from "@supabase/supabase-js";
+import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 // import Reviews from "@/components/Reviews";
 // import fetchSingleProduct from "@/config/fetchSupabaseSingleProduct";
 
 export type Product = {
-  id: number ;
+  id: number;
   name: string;
   price: number;
   category: string;
   variants: string[];
-  inventory: string[] ;
+  inventory: string[];
   image_url: string;
 };
 
 
-const SinglePage = ({ searchParams }: { searchParams: { productId: string | undefined } }) => {
+const SinglePage = (
+  // { searchParams }: { searchParams: { productId: string | undefined } }
+) => {
 
-  const productName = parseInt(searchParams.productId as string) || 1;
+  // const productName = parseInt(searchParams.productId as string) || 1;
+  const searchParams = useSearchParams(); // Get searchParams using Next.js's useSearchParams hook
+  const productName = parseInt(searchParams.get('productId') as string) || 1
   const [product, setProduct] = useState<Product | null>()
   const [error, setError] = useState<PostgrestError | null>()
   const otherImages = [
@@ -44,7 +49,7 @@ const SinglePage = ({ searchParams }: { searchParams: { productId: string | unde
 
   const FetchSingleProduct =
     async (productName: number):
-      Promise<{ data: Product | null, error: PostgrestError| null }> => {
+      Promise<{ data: Product | null, error: PostgrestError | null }> => {
       console.log(productName, "productname")
       try {
         const { data, error } = await (supabase as SupabaseClient)

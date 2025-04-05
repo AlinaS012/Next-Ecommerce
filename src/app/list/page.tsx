@@ -1,17 +1,21 @@
+"use client"
 import Filter from "@/components/Filter";
 import ProductList from "@/components/ProductList";
 import Skeleton from "@/components/Skeleton";
 import Image from "next/image";
+import { useSearchParams } from "next/navigation";
 import { Suspense } from "react";
-type PageProps = {
-  searchParams: { cat: string | undefined };
-};
-const ListPage = async ({ searchParams }:
-  // { searchParams: { cat: string | undefined } }
-  PageProps
+// type PageProps = {
+//   searchParams: { cat: string | undefined };
+// };
+const ListPage = (
+  // { searchParams }:
+  // // { searchParams: { cat: string | undefined } }
+  // PageProps
 ) => {
-
-  const categoryName = (searchParams.cat as string) || 'Shoes';
+  const searchParams = useSearchParams(); // Get searchParams using Next.js's useSearchParams hook
+  const categoryName = searchParams.get('cat') as string || 1
+  // const categoryName = (searchParams.cat as string) || 'Shoes';
 
   return (
     <div className="px-4 md:px-8 lg:px-16 xl:px-32 2xl:px-64 relative">
