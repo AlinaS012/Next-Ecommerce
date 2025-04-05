@@ -5,7 +5,7 @@ import ProductImages from "@/components/ProductImages";
 import useSupabase from "@/hooks/useSupabase";
 import { PostgrestError, SupabaseClient } from "@supabase/supabase-js";
 import { useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 // import Reviews from "@/components/Reviews";
 // import fetchSingleProduct from "@/config/fetchSupabaseSingleProduct";
 
@@ -79,56 +79,58 @@ const SinglePage = (
   }, [])
   // console.log(singleProdcutError)
   return (
-    product ?
-      (<div className="px-4 md:px-8 lg:px-16 xl:px-32 2xl:px-64 relative flex flex-col lg:flex-row gap-16">
-        {/* IMG */}
-        <div className="w-full lg:w-1/2 lg:sticky top-20 h-max">
-          <ProductImages
-            items={[{ id: 1, url: (product?.image_url as string) }, ...otherImages]}
-          />
-        </div>
-        {/* TEXTS */}
-        <div className="w-full lg:w-1/2 flex flex-col gap-6">
-          <h1 className="text-4xl font-medium">
-            {product.name}
-          </h1>
-          <p className="text-gray-500">
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Hic dolorum debitis vitae omnis perferendis voluptatem eos explicabo dolore eum! Nisi porro ullam soluta laborum necessitatibus repudiandae asperiores reiciendis sapiente deleniti!
-          </p>
-          <div className="h-[2px] bg-gray-100" />
-
-          <h2 className="font-medium text-2xl">
-            ${product.price}
-          </h2>
-
-          <div className="h-[2px] bg-gray-100" />
-          <CustomizeProducts productId={product.id}
-            variants={product.variants}
-            inventory={product.inventory}
-            category={product.category}
-          />
-          <div className="h-[2px] bg-gray-100" />
-          {/* {product.additionalInfoSections?.map((section: any) => ( */}
-          <div className="text-sm" //key={section.title}
-          >
-            <h4 className="font-medium mb-4">
-              {/* {section.title} */}
-              Title
-            </h4>
-            <p>
-              {/* {section.description} */}
+    <Suspense>{
+      product ?
+        (<div className="px-4 md:px-8 lg:px-16 xl:px-32 2xl:px-64 relative flex flex-col lg:flex-row gap-16">
+          {/* IMG */}
+          <div className="w-full lg:w-1/2 lg:sticky top-20 h-max">
+            <ProductImages
+              items={[{ id: 1, url: (product?.image_url as string) }, ...otherImages]}
+            />
+          </div>
+          {/* TEXTS */}
+          <div className="w-full lg:w-1/2 flex flex-col gap-6">
+            <h1 className="text-4xl font-medium">
+              {product.name}
+            </h1>
+            <p className="text-gray-500">
               Lorem ipsum dolor sit, amet consectetur adipisicing elit. Hic dolorum debitis vitae omnis perferendis voluptatem eos explicabo dolore eum! Nisi porro ullam soluta laborum necessitatibus repudiandae asperiores reiciendis sapiente deleniti!
             </p>
-          </div>
-          {/* // ))} */}
-          <div className="h-[2px] bg-gray-100" />
-          {/* REVIEWS */}
-          {/* <h1 className="text-2xl">User Reviews</h1>
+            <div className="h-[2px] bg-gray-100" />
+
+            <h2 className="font-medium text-2xl">
+              ${product.price}
+            </h2>
+
+            <div className="h-[2px] bg-gray-100" />
+            <CustomizeProducts productId={product.id}
+              variants={product.variants}
+              inventory={product.inventory}
+              category={product.category}
+            />
+            <div className="h-[2px] bg-gray-100" />
+            {/* {product.additionalInfoSections?.map((section: any) => ( */}
+            <div className="text-sm" //key={section.title}
+            >
+              <h4 className="font-medium mb-4">
+                {/* {section.title} */}
+                Title
+              </h4>
+              <p>
+                {/* {section.description} */}
+                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Hic dolorum debitis vitae omnis perferendis voluptatem eos explicabo dolore eum! Nisi porro ullam soluta laborum necessitatibus repudiandae asperiores reiciendis sapiente deleniti!
+              </p>
+            </div>
+            {/* // ))} */}
+            <div className="h-[2px] bg-gray-100" />
+            {/* REVIEWS */}
+            {/* <h1 className="text-2xl">User Reviews</h1>
           <Suspense fallback="Loading...">
             <Reviews productId={product.id} />
           </Suspense> */}
-        </div>
-      </div>) : null
+          </div>
+        </div>) : null}
+    </Suspense>
   );
 };
 
