@@ -9,13 +9,13 @@ import { useEffect, useState } from "react";
 // import fetchSingleProduct from "@/config/fetchSupabaseSingleProduct";
 
 export type Product = {
-  id: number | any;
-  name: string | any;
-  price: number | any;
-  category: string | any;
-  variants: string[] | any;
-  inventory: string[] | any;
-  image_url: string | any;
+  id: number ;
+  name: string;
+  price: number;
+  category: string;
+  variants: string[];
+  inventory: string[] ;
+  image_url: string;
 };
 
 
@@ -39,11 +39,12 @@ const SinglePage = ({ searchParams }: { searchParams: { productId: string | unde
     }
   ]
   // const { data: product, error: singleProdcutError } = await fetchSingleProduct(productName)
+  console.log(error)
+  const supabase = useSupabase();
 
   const FetchSingleProduct =
     async (productName: number):
-      Promise<{ data: Product | null, error: any }> => {
-      const supabase = useSupabase();
+      Promise<{ data: Product | null, error: PostgrestError| null }> => {
       console.log(productName, "productname")
       try {
         const { data, error } = await (supabase as SupabaseClient)
@@ -62,7 +63,7 @@ const SinglePage = ({ searchParams }: { searchParams: { productId: string | unde
 
       } catch (err) {
         console.error("Unexpected error fetching products:", err);
-        return { data: null, error: err };
+        return { data: null, error: err as PostgrestError };
       }
     };
   useEffect(() => {

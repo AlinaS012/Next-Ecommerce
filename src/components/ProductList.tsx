@@ -19,44 +19,66 @@ const ProductList = ({
   // limit?: number;
   // searchParams?: any;
 }) => {
+  const supabase = useSupabase();
+  const [products, setProducts] = useState([])
+  const [error, setError] = useState<PostgrestError | null>()
+  const FetchSupabaseProductsOfCategory = async (categoryName: string) => {
+    const fetchProductsList = async () => {
+      const { data, error } = await (supabase as SupabaseClient)
+        .from('products')
+        .select('category, id, name, price, image_url, variants, inventory')
+        .eq('category', categoryName);
+
+      // if (error) {
+      //     console.error("Error fetching products by category:", error);
+      //     return;
+      // }
+
+      // console.log("Fetched products in category:", categoryName);
+      // console.log(data);
+
+      // return data;
+      return { data, error }
+    };
+
+    const { data: productTemp, error } = await fetchProductsList();
+    console.log("Products in category", categoryName, ":", products);
+    setProducts(productTemp as never[])
+    setError(error)
+    return products;
+  };
+  const FetchProducts = async () => {
+    const fetchProductsList = async () => {
+      const { data, error } = await (supabase as SupabaseClient).from('products').select();
+      // if (error) {
+      //   return error
+      // }
+      // if (data) { 
+      //   return data || ""
+      // }
+      setProducts(data as never[])
+      setError(error)
+      return { data, error }
+    };
+    const products = await fetchProductsList();
+    console.log("products", products)
+
+    return products
+  }
+  ////
+  // useEffect(() => {
+  //   FetchProducts()
+  // }, [])
+  useEffect(() => {
+    console.log(error)
+    if (categoryName) {
+      FetchSupabaseProductsOfCategory(categoryName)
+    } else {
+      FetchProducts()
+    }
+  }, [])
   if (categoryName) {
     // const { data: products, error } = await fetchSupabaseProductsOfCategory(categoryName as string)
-    const [products, setProducts] = useState([])
-    const [error, setError] = useState<PostgrestError | null>()
-    const FetchSupabaseProductsOfCategory = async (categoryName: string) => {
-      const supabase = useSupabase();
-
-      const fetchProductsList = async () => {
-        const { data, error } = await (supabase as SupabaseClient)
-          .from('products')
-          .select('category, id, name, price, image_url, variants, inventory')
-          .eq('category', categoryName);
-
-        // if (error) {
-        //     console.error("Error fetching products by category:", error);
-        //     return;
-        // }
-
-        // console.log("Fetched products in category:", categoryName);
-        // console.log(data);
-
-        // return data;
-        return { data, error }
-      };
-
-      const { data: productTemp, error } = await fetchProductsList();
-      console.log("Products in category", categoryName, ":", products);
-      setProducts(productTemp as never[])
-      setError(error)
-      return products;
-    };
-    useEffect(() => {
-      console.log(error)
-      FetchSupabaseProductsOfCategory(categoryName)
-    }, [])
-
-
-
     return (
       <div className="w-full mt-12 flex gap-x-2 gap-y-16 justify-between flex-wrap">
         {products && (products as Product[]).map((product, index) => (
@@ -81,34 +103,8 @@ const ProductList = ({
     )
   } else {
     // const { data: products, error } = await fetchSupabaseProducts()
-    const [products, setProducts] = useState([])
-    const [error, setError] = useState<PostgrestError | null>()
-    ///
-    const FetchProducts = async () => {
-
-      const supabase = useSupabase();
-
-      const fetchProductsList = async () => {
-        const { data, error } = await (supabase as SupabaseClient).from('products').select();
-        // if (error) {
-        //   return error
-        // }
-        // if (data) { 
-        //   return data || ""
-        // }
-        setProducts(data as never[])
-        setError(error)
-        return { data, error }
-      };
-      const products = await fetchProductsList();
-      console.log("products", products)
-
-      return products
-    }
-    ////
-    useEffect(() => {
-      FetchProducts()
-    }, [])
+    // const [products, setProducts] = useState([])
+    // const [error, setError] = useState<PostgrestError | null>()
     console.log("Fetch Products Error: ", error)
     return (
       <div className="w-full mt-12 flex gap-x-2 gap-y-16 justify-between flex-wrap">

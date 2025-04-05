@@ -67,7 +67,7 @@ const LoginPage = () => {
     setError("");
 
     try {
-      let response;
+      // let response;
       switch (mode) {
         case MODE.LOGIN:
           if (!email || !password) {
