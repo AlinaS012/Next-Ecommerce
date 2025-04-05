@@ -2,6 +2,7 @@
 // import Add from "@/components/Add";
 import CustomizeProducts from "@/components/CustomizeProducts";
 import ProductImages from "@/components/ProductImages";
+import Skeleton from "@/components/Skeleton";
 import useSupabase from "@/hooks/useSupabase";
 import { PostgrestError, SupabaseClient } from "@supabase/supabase-js";
 import { useSearchParams } from "next/navigation";
@@ -132,4 +133,10 @@ const SinglePage = (
   );
 };
 
-export default () => (<Suspense><SinglePage/></Suspense>)
+export default function PageWrapper() {
+  return (
+    <Suspense fallback={<Skeleton />}>
+      <SinglePage />
+    </Suspense>
+  );
+}

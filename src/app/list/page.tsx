@@ -51,4 +51,10 @@ const ListPage = (
   );
 };
 
-export default ()=>(<Suspense><ListPage/></Suspense>);
+export default function PageWrapper() {
+  return (
+    <Suspense fallback={<Skeleton />}>
+      <ListPage />
+    </Suspense>
+  );
+}
