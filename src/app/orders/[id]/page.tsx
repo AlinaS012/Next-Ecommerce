@@ -1,7 +1,9 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
-const OrderPage = async ({ params }: { params: { id: string } }) => {
+const OrderPage = async (
+  // { params }: { params: { id: string } }
+) => {
   // const id = params.id;
 
 
@@ -11,7 +13,7 @@ const OrderPage = async ({ params }: { params: { id: string } }) => {
     console.log(err)
     return notFound();
   }
-  console.log(params)
+  // console.log(params)
   return (
     <div className="flex flex-col h-[calc(100vh-180px)] items-center justify-center ">
       <div className="shadow-[rgba(0,_0,_0,_0.25)_0px_25px_50px_-12px] px-40 py-20">
