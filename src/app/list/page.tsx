@@ -3,8 +3,13 @@ import ProductList from "@/components/ProductList";
 import Skeleton from "@/components/Skeleton";
 import Image from "next/image";
 import { Suspense } from "react";
-
-const ListPage = async ({ searchParams }: { searchParams: { cat: string | undefined } }) => {
+type PageProps = {
+  searchParams: { cat: string | undefined };
+};
+const ListPage = async ({ searchParams }:
+  // { searchParams: { cat: string | undefined } }
+  PageProps
+) => {
 
   const categoryName = (searchParams.cat as string) || 'Shoes';
 
