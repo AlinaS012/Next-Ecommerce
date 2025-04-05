@@ -1,6 +1,6 @@
 "use client"
 // import fetchSupabaseProducts from "@/config/fetchSupabaseProducts";
-import fetchSupabaseProductsByCategory from "@/config/fetchSupabaseProductsByCategory";
+// import fetchSupabaseProductsByCategory from "@/config/fetchSupabaseProductsByCategory";
 import useSupabase from "@/hooks/useSupabase";
 import { PostgrestError, SupabaseClient } from "@supabase/supabase-js";
 import Image from "next/image";
@@ -25,10 +25,10 @@ export interface GroupedProducts {
 const CategoryList = () => {
   const [categories, setCategories] = useState<GroupedProducts | undefined>()
   const [error, setError] = useState<PostgrestError | null>()
-
+  const supabase = useSupabase();
+  console.log(error)
   //////
   const FetchSupabaseProductsByCategory = async () => {
-    const supabase = useSupabase();
 
     const fetchProductsList = async (): Promise<GroupedProducts | undefined> => {
       const { data, error } = await (supabase as SupabaseClient)

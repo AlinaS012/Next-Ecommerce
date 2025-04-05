@@ -3,10 +3,11 @@ import Image from "next/image";
 import Link from "next/link";
 // import fetchSupabaseProducts from "@/config/fetchSupabaseProducts";
 // import fetchSupabaseProductsOfCategory from "@/config/fetchSupabaseProductOfCategory";
-import { Product } from "@/config/fetchSupabaseSingleProduct";
+// import { Product } from "@/config/fetchSupabaseSingleProduct";
 import useSupabase from "@/hooks/useSupabase";
 import { PostgrestError, SupabaseClient } from "@supabase/supabase-js";
 import { useEffect, useState } from "react";
+import { Product } from "@/app/product/page";
 
 // const PRODUCT_PER_PAGE = 8;
 
