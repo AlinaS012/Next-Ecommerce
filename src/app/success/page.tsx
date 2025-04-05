@@ -1,6 +1,7 @@
 "use client";
+import Skeleton from "@/components/Skeleton";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect } from "react";
+import { Suspense, useEffect } from "react";
 import Confetti from "react-confetti";
 
 const SuccessPage = () => {
@@ -33,4 +34,10 @@ const SuccessPage = () => {
   );
 };
 
-export default SuccessPage;
+export default function PageWrapper() {
+  return (
+    <Suspense fallback={<Skeleton />}>
+      <SuccessPage />
+    </Suspense>
+  );
+}

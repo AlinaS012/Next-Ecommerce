@@ -106,7 +106,7 @@ const ProductList = ({
     // const { data: products, error } = await fetchSupabaseProducts()
     // const [products, setProducts] = useState([])
     // const [error, setError] = useState<PostgrestError | null>()
-    console.log("Fetch Products Error: ", error)
+    // console.log("Fetch Products Error: ", error)
     return (
       <div className="w-full mt-12 flex gap-x-2 gap-y-16 justify-between flex-wrap">
         {products && (products as Product[]).map((product, index) => (
