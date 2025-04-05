@@ -132,4 +132,4 @@ const SinglePage = (
   );
 };
 
-export default () => <Suspense><SinglePage/></Suspense>
+export default () => (<Suspense><SinglePage/></Suspense>)

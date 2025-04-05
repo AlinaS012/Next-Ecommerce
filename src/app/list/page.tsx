@@ -51,4 +51,4 @@ const ListPage = (
   );
 };
 
-export default ()=><Suspense><ListPage/></Suspense>;
+export default ()=>(<Suspense><ListPage/></Suspense>);
