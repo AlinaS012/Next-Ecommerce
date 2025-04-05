@@ -4,9 +4,9 @@ import Skeleton from "@/components/Skeleton";
 import Image from "next/image";
 import { Suspense } from "react";
 
-const ListPage = async ({ searchParams }: { searchParams: any }) => {
+const ListPage = async ({ searchParams }: { searchParams: { cat: string | undefined } }) => {
 
-  const categoryName = searchParams.cat || 'Shoes';
+  const categoryName = (searchParams.cat as string) || 'Shoes';
 
   return (
     <div className="px-4 md:px-8 lg:px-16 xl:px-32 2xl:px-64 relative">

@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import fetchSupabaseProducts from "@/config/fetchSupabaseProducts";
 import fetchSupabaseProductsOfCategory from "@/config/fetchSupabaseProductOfCategory";
+import { Product } from "@/config/fetchSupabaseSingleProduct";
 
 // const PRODUCT_PER_PAGE = 8;
 
@@ -21,7 +22,7 @@ const ProductList = async ({
     console.log(error)
     return (
       <div className="w-full mt-12 flex gap-x-2 gap-y-16 justify-between flex-wrap">
-        {products && (products as any[]).map((product, index) => (
+        {products && (products as Product[]).map((product, index) => (
           <Link key={index} href={`/product?productId=${product.id}`} className="w-full flex flex-col gap-4 sm:w-[45%] lg:[22%]">           <div className="relative w-full h-80">
             {/* First image */}
             <Image
@@ -46,7 +47,7 @@ const ProductList = async ({
     console.log("Fetch Products Error: ", error)
     return (
       <div className="w-full mt-12 flex gap-x-2 gap-y-16 justify-between flex-wrap">
-        {products && (products as any[]).map((product, index) => (
+        {products && (products as Product[]).map((product, index) => (
           <Link key={index} href={`/product?productId=${product.id}`} className="w-full flex flex-col gap-4 sm:w-[45%] lg:[22%]">           <div className="relative w-full h-80">
             {/* First image */}
             <Image

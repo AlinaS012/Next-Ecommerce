@@ -15,7 +15,7 @@ export interface GroupedProducts {
   [category: string]: Product[];
 }
 
-const fetchSupabaseProductsByCategory = async () => {
+const FetchSupabaseProductsByCategory = async () => {
   const supabase = useSupabase();
 
   const fetchProductsList = async (): Promise<GroupedProducts | undefined> => {
@@ -46,4 +46,4 @@ const fetchSupabaseProductsByCategory = async () => {
   return products;
 };
 
-export default fetchSupabaseProductsByCategory;
+export default FetchSupabaseProductsByCategory;

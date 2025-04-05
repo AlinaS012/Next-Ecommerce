@@ -3,9 +3,9 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import CartModal from "./CartModal";
-import Cookies from "js-cookie";
+// import Cookies from "js-cookie";
 
 const NavIcons = () => {
   const [isProfileOpen, setIsProfileOpen] = useState(false);
@@ -13,13 +13,14 @@ const NavIcons = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const router = useRouter();
-  const pathName = usePathname();
+  // const pathName = usePathname();
 
   // TEMPORARY
   const isLoggedIn = false;
 
   const handleProfile = () => {
     if (!isLoggedIn) {
+      setIsLoading(false)
       router.push("/login");
     } else {
       setIsProfileOpen((prev) => !prev);

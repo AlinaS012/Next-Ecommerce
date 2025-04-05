@@ -1,12 +1,12 @@
 import CategoryList from "@/components/CategoryList";
-import CheckStatus from "@/components/CheckStatus";
+// import CheckStatus from "@/components/CheckStatus";
 import ProductList from "@/components/ProductList";
 import Skeleton from "@/components/Skeleton";
 import Slider from "@/components/Slider";
 import UseSupabase from "@/components/UseSupabase";
-import { SupabaseClient } from "@supabase/supabase-js";
-import { redirect, useRouter } from "next/navigation";
-import { Suspense, useContext, useEffect, useState } from "react";
+// import { SupabaseClient } from "@supabase/supabase-js";
+// import { redirect, useRouter } from "next/navigation";
+import { Suspense } from "react";
 
 const HomePage = () => {
   return (

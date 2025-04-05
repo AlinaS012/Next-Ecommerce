@@ -2,9 +2,9 @@
 
 import useSupabase from "@/hooks/useSupabase";
 import { SupabaseClient } from "@supabase/supabase-js";
-import { Suspense, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 
-const UseFetchProducts = async () => {
+const UseFetchProducts = () => {
     const [products, setProducts] = useState<null | string[]>(null);
     const [error, setError] = useState<null | string>(null);
     const supabase = useSupabase();

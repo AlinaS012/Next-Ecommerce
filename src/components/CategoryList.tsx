@@ -1,8 +1,8 @@
-import fetchSupabaseProducts from "@/config/fetchSupabaseProducts";
+// import fetchSupabaseProducts from "@/config/fetchSupabaseProducts";
 import fetchSupabaseProductsByCategory from "@/config/fetchSupabaseProductsByCategory";
 import Image from "next/image";
 import Link from "next/link";
-import { GroupedProducts } from "@/config/fetchSupabaseProductsByCategory";
+// import { GroupedProducts } from "@/config/fetchSupabaseProductsByCategory";
 
 const CategoryList = async () => {
   const categories = await fetchSupabaseProductsByCategory()

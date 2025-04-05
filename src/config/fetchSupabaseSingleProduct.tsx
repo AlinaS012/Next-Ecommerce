@@ -11,7 +11,7 @@ export type Product = {
     image_url: string;
 };
 
-const fetchSingleProduct =
+const FetchSingleProduct =
     async (productName: number):
         Promise<{ data: Product | null, error: any }> => {
         const supabase = useSupabase();
@@ -35,4 +35,4 @@ const fetchSingleProduct =
         }
     };
 
-export default fetchSingleProduct;
+export default FetchSingleProduct;

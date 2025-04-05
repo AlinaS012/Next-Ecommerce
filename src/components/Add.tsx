@@ -29,6 +29,7 @@ const Add = ({
     if (!selectedSize && category !== 'Accessories') {
       alert('Please Select Size');
     }
+    console.log(productId, selectedColor)
   };
 
   return (

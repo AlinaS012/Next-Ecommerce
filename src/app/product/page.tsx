@@ -1,13 +1,13 @@
-import Add from "@/components/Add";
+// import Add from "@/components/Add";
 import CustomizeProducts from "@/components/CustomizeProducts";
 import ProductImages from "@/components/ProductImages";
-import Reviews from "@/components/Reviews";
-import fetchSingleProduct, { Product } from "@/config/fetchSupabaseSingleProduct";
+// import Reviews from "@/components/Reviews";
+import fetchSingleProduct from "@/config/fetchSupabaseSingleProduct";
 
 
-const SinglePage = async ({ searchParams }: { searchParams: any }) => {
+const SinglePage = async ({ searchParams }: { searchParams: { productId: string | undefined } }) => {
 
-  const productName = searchParams.productId || 1;
+  const productName = parseInt(searchParams.productId as string) || 1;
 
   const otherImages = [
     {
@@ -25,7 +25,7 @@ const SinglePage = async ({ searchParams }: { searchParams: any }) => {
   ]
   const { data: product, error: singleProdcutError } = await fetchSingleProduct(productName)
   const firstImg = {
-    id: 1, url: product?.image_url
+    id: 1, url: (product?.image_url as string)
   }
   console.log(singleProdcutError)
   return (

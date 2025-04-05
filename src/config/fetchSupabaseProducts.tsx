@@ -1,7 +1,7 @@
 import useSupabase from "@/hooks/useSupabase";
 import { SupabaseClient } from "@supabase/supabase-js";
 
-const fetchProducts = async () => {
+const FetchProducts = async () => {
 
   const supabase = useSupabase();
 
@@ -20,4 +20,4 @@ const fetchProducts = async () => {
 
   return products
 }
-export default fetchProducts;
+export default FetchProducts;

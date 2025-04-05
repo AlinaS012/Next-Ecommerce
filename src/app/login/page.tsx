@@ -1,7 +1,7 @@
 "use client";
 
 import { redirect, useRouter } from "next/navigation";
-import Cookies from "js-cookie";
+// import Cookies from "js-cookie";
 import { useEffect, useState } from "react";
 import useSupabase from "@/hooks/useSupabase";
 import { SupabaseClient } from "@supabase/supabase-js";
@@ -23,7 +23,7 @@ const LoginPage = () => {
       router.push("/");
     }
   })
-  const supabase: SupabaseClient<any, "public", any> | null = useSupabase();
+  const supabase = useSupabase();
   const [mode, setMode] = useState(MODE.LOGIN);
 
   // const [username, setUsername] = useState("");
@@ -33,7 +33,7 @@ const LoginPage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
-
+  console.log(emailCode)
   const formTitle =
     mode === MODE.LOGIN
       ? "Log in"
@@ -73,7 +73,7 @@ const LoginPage = () => {
           if (!email || !password) {
             return;
           }
-          let { data: loginData, error: loginError } = await (supabase as SupabaseClient).auth.signInWithPassword({
+          const { data: loginData, error: loginError } = await (supabase as SupabaseClient).auth.signInWithPassword({
             email: email,
             password: password
           });
@@ -93,7 +93,7 @@ const LoginPage = () => {
           if (!email || !password) {
             return;
           }
-          let { data: registerData, error: registerError } = await (supabase as SupabaseClient).auth.signUp({
+          const { data: registerData, error: registerError } = await (supabase as SupabaseClient).auth.signUp({
             email: email,
             password: password
           });
@@ -102,7 +102,7 @@ const LoginPage = () => {
             return;
           }
 
-          response = registerData.session;
+          // response = registerData.session;
           setMessage("Signed up successfully, please confirm your email");
           break;
 

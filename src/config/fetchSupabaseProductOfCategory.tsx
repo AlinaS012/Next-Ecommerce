@@ -1,11 +1,11 @@
 import useSupabase from "@/hooks/useSupabase";
-import { Product } from "./fetchSupabaseSingleProduct";
+// import { Product } from "./fetchSupabaseSingleProduct";
 import { SupabaseClient } from "@supabase/supabase-js";
 
-const fetchSupabaseProductsOfCategory = async (categoryName: string) => {
+const FetchSupabaseProductsOfCategory = async (categoryName: string) => {
     const supabase = useSupabase();
 
-    const fetchProductsList = async (): Promise<any> => {
+    const fetchProductsList = async () => {
         const { data, error } = await (supabase as SupabaseClient)
             .from('products')
             .select('category, id, name, price, image_url, variants, inventory')
@@ -29,4 +29,4 @@ const fetchSupabaseProductsOfCategory = async (categoryName: string) => {
     return products;
 };
 
-export default fetchSupabaseProductsOfCategory;
+export default FetchSupabaseProductsOfCategory;

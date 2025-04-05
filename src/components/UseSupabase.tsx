@@ -2,7 +2,7 @@
 
 import useSupabase from "@/hooks/useSupabase";  
 import { SupabaseClient } from "@supabase/supabase-js";
-import { Suspense, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 
 const UseSupabase = () => {
     const [user, setUser] = useState<null | string>(null);

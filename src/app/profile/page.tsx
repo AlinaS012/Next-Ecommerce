@@ -1,6 +1,6 @@
 import UpdateButton from "@/components/UpdateButton";
 import { updateUser } from "@/lib/actions";
-import Link from "next/link";
+// import Link from "next/link";
 
 const ProfilePage = async () => {
 
