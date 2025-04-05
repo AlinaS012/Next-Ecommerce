@@ -2,7 +2,7 @@
 
 
 export const updateUser = async (formData: FormData) => {
-
+  console.log(formData)
   // const id = formData.get("id") as string;
   // const username = formData.get("username") as string;
   // const firstName = formData.get("firstName") as string;

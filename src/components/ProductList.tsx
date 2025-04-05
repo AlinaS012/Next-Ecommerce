@@ -1,14 +1,16 @@
-
-
+"use client"
 import Image from "next/image";
 import Link from "next/link";
-import fetchSupabaseProducts from "@/config/fetchSupabaseProducts";
-import fetchSupabaseProductsOfCategory from "@/config/fetchSupabaseProductOfCategory";
+// import fetchSupabaseProducts from "@/config/fetchSupabaseProducts";
+// import fetchSupabaseProductsOfCategory from "@/config/fetchSupabaseProductOfCategory";
 import { Product } from "@/config/fetchSupabaseSingleProduct";
+import useSupabase from "@/hooks/useSupabase";
+import { PostgrestError, SupabaseClient } from "@supabase/supabase-js";
+import { useEffect, useState } from "react";
 
 // const PRODUCT_PER_PAGE = 8;
 
-const ProductList = async ({
+const ProductList = ({
   categoryName,
   // limit,
   // searchParams,
@@ -18,8 +20,43 @@ const ProductList = async ({
   // searchParams?: any;
 }) => {
   if (categoryName) {
-    const { data: products, error } = await fetchSupabaseProductsOfCategory(categoryName as string)
-    console.log(error)
+    // const { data: products, error } = await fetchSupabaseProductsOfCategory(categoryName as string)
+    const [products, setProducts] = useState([])
+    const [error, setError] = useState<PostgrestError | null>()
+    const FetchSupabaseProductsOfCategory = async (categoryName: string) => {
+      const supabase = useSupabase();
+
+      const fetchProductsList = async () => {
+        const { data, error } = await (supabase as SupabaseClient)
+          .from('products')
+          .select('category, id, name, price, image_url, variants, inventory')
+          .eq('category', categoryName);
+
+        // if (error) {
+        //     console.error("Error fetching products by category:", error);
+        //     return;
+        // }
+
+        // console.log("Fetched products in category:", categoryName);
+        // console.log(data);
+
+        // return data;
+        return { data, error }
+      };
+
+      const { data: productTemp, error } = await fetchProductsList();
+      console.log("Products in category", categoryName, ":", products);
+      setProducts(productTemp as never[])
+      setError(error)
+      return products;
+    };
+    useEffect(() => {
+      console.log(error)
+      FetchSupabaseProductsOfCategory(categoryName)
+    }, [])
+
+
+
     return (
       <div className="w-full mt-12 flex gap-x-2 gap-y-16 justify-between flex-wrap">
         {products && (products as Product[]).map((product, index) => (
@@ -43,7 +80,35 @@ const ProductList = async ({
       </div >
     )
   } else {
-    const { data: products, error } = await fetchSupabaseProducts()
+    // const { data: products, error } = await fetchSupabaseProducts()
+    const [products, setProducts] = useState([])
+    const [error, setError] = useState<PostgrestError | null>()
+    ///
+    const FetchProducts = async () => {
+
+      const supabase = useSupabase();
+
+      const fetchProductsList = async () => {
+        const { data, error } = await (supabase as SupabaseClient).from('products').select();
+        // if (error) {
+        //   return error
+        // }
+        // if (data) { 
+        //   return data || ""
+        // }
+        setProducts(data as never[])
+        setError(error)
+        return { data, error }
+      };
+      const products = await fetchProductsList();
+      console.log("products", products)
+
+      return products
+    }
+    ////
+    useEffect(() => {
+      FetchProducts()
+    }, [])
     console.log("Fetch Products Error: ", error)
     return (
       <div className="w-full mt-12 flex gap-x-2 gap-y-16 justify-between flex-wrap">

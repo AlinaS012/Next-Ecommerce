@@ -82,7 +82,7 @@ const LoginPage = () => {
             setError(loginError.message);
             return;
           } else {
-            response = loginData.session;
+            // response = loginData.session;
             console.log(loginData, "loginData")
             localStorage.setItem("token", loginData.session?.access_token as string)
             redirect('/')
@@ -101,7 +101,7 @@ const LoginPage = () => {
             setError(registerError.message);
             return;
           }
-
+          console.log(registerData)
           // response = registerData.session;
           setMessage("Signed up successfully, please confirm your email");
           break;
